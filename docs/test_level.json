@@ -1,13 +1,13 @@
 {
   "name": "test1",
   "tilesSet": [
-    { "type": "REGULAR_ROAD", "symble": "RR" },
-    { "type": "HARD_ROAD", "symble": "HR" },
-    { "type": "ENGINEERED_ROAD", "symble": "UR" },
-    { "type": "TARGETING_TOWER", "symble": "T" },
-    { "type": "CASTLE", "symble": "C" },
-    { "type": "EMPTY", "symble": "E" },
-    { "type": "BARRACKS", "symble": "B" }
+    { "type": "REGULAR_ROAD", "symbol": "RR" },
+    { "type": "HARD_ROAD", "symbol": "HR" },
+    { "type": "ENGINEERED_ROAD", "symbol": "UR" },
+    { "type": "TARGETING_TOWER", "symbol": "T" },
+    { "type": "CASTLE", "symbol": "C" },
+    { "type": "EMPTY", "symbol": "E" },
+    { "type": "BARRACKS", "symbol": "B" }
   ],
   "positions": [
     ["E","E","E","E","E","E","T","E","E","E","T","E","E","E","T","E","E","E","E","E"],

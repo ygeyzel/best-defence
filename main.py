@@ -54,9 +54,9 @@ def main():
 
     all_sprites, roads, towers = init_tiles_groups()
 
-    soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
-    soldier_0.start_movement()
-    all_sprites.add(soldier_0)
+    # soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
+    # soldier_0.start_movement()
+    # all_sprites.add(soldier_0)
 
     while running:
         for event in pg.event.get():
