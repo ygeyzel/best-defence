@@ -8,10 +8,13 @@ from utils.common import TILE_WIDTH
 
 
 class TileObject(Enum):
-    REGULAR_ROAD = auto()
-    HARD_ROAD = auto()
-    ENGINEERED_ROAD = auto()
-    TARGETING_TOWER = auto()
+     REGULAR_ROAD = "REGULAR_ROAD"
+     HARD_ROAD = "HARD_ROAD"
+     ENGINEERED_ROAD = "ENGINEERED_ROAD"
+     TARGETING_TOWER = "TARGETING_TOWER"
+     CASTLE = "CASTLE"
+     EMPTY = "EMPTY"
+     BARRACKS = "BARRACKS"
 
 
 class Tile(pg.sprite.Sprite):
