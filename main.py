@@ -4,26 +4,28 @@ from sprites.tile import Tile, TileObject
 from sprites.roads import Road
 from sprites.tower import Tower
 from sprites.soldier import Soldier
-
+from utils import grid 
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 400
 FPS = 60
 
-GRID_START_POS = (150, 200)
-INIT_GRID = (
-    (None, None, None, None, TileObject.TARGETING_TOWER, None, None, None, None, None,
-     None, None, None, None, None, None, None, None, None, None),
-    (TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.ENGINEERED_ROAD,
-     TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD)
-)
+
+# GRID_START_POS = (150, 200)
+# INIT_GRID = (
+#     (None, None, None, None, TileObject.TARGETING_TOWER, TileObject.TARGETING_TOWER, None, None, None, None,
+#      None, None, None, None, None, None, None, None, None, None),
+#     (TileObject.REGULAR_ROAD, TileObject.TARGETING_TOWER, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.ENGINEERED_ROAD,
+#      TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD)
+# )
 
 
 def init_tiles_groups():
     all_sprites = pg.sprite.RenderPlain()
     roads = pg.sprite.Group()
     towers = pg.sprite.Group()
-
+    GRID_START_POS, INIT_GRID = grid.load_map_from_file('docs/test_level.json')
+    print(INIT_GRID)
     for i, grid_row in enumerate(INIT_GRID):
         for j, tile_object in enumerate(grid_row):
             x = GRID_START_POS[0] + TILE_WIDTH * j
@@ -32,7 +34,7 @@ def init_tiles_groups():
 
             all_sprites.add(tile)
 
-            if tile_object is not None:
+            if tile_object is not TileObject.EMPTY:
                 populated_obj = tile.populate_tile(tile_object)
                 all_sprites.add(populated_obj)
 
@@ -42,11 +44,12 @@ def init_tiles_groups():
                 if isinstance(populated_obj, Tower):
                     towers.add(populated_obj)
 
-        return all_sprites, roads, towers
+    return all_sprites, roads, towers
 
 
 def main():
     pg.init()
+
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     background = pg.Surface(screen.get_size())
     clock = pg.time.Clock()
