@@ -11,7 +11,7 @@ class Tile(pg.sprite.Sprite):
     def __init__(self, block_level: int, pos: Tuple[float, float]):
         pg.sprite.Sprite.__init__(self)
 
-        self.tile_images = 3 * [load_image('tile.jpg', (TILE_WIDTH, TILE_WIDTH))[0]]
+        self.tile_images = 3 * [load_image('tiles\\empty.png', (TILE_WIDTH, TILE_WIDTH))[0]]
         self.block_level = block_level
 
         self._set_image()
