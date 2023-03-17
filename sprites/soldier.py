@@ -4,6 +4,7 @@ import pygame as pg
 from utils.resources import load_image
 
 SOLDIER_WIDTH = 25
+MAX_HP = 100
 
 class SoldierState(Enum):
     WAIT = auto()
