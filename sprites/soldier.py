@@ -25,7 +25,7 @@ class Soldier(pg.sprite.Sprite):
         self.state = SoldierState.WAIT
         self.pos = pos
 
-        self.manuverability_factor = None
+        self.manuverability_factor = 1
 
         self.image, self.rect = load_image(
             'soldiers/soldier.png', (SOLDIER_WIDTH, SOLDIER_WIDTH), (0, 0, 0))
@@ -38,8 +38,6 @@ class Soldier(pg.sprite.Sprite):
         if self.state == SoldierState.ADVANCE:
             actual_speed = self.speed * self.manuverability_factor
             self.rect.move_ip((actual_speed, 0))
-
-        self.manuverability_factor = None
 
     def start_movement(self):
         self.state = SoldierState.ADVANCE
