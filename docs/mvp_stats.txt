@@ -1,0 +1,43 @@
+level 1 (MVP):
+	two rows, 20 colomns
+
+clock:
+	time unit = 1; sec
+
+Pulse torret:
+	posission: (1,6)
+	Attack Radius: 1->2 tiles
+	Attack:	       30->15 per 5 sec
+	HP: 200
+
+Targeting Turret:
+	follows frontal units:
+	posission: (1,13)
+	Range: 5 tiles
+	Attack: 20 per 10 sec
+	HP: 150
+
+castle:
+	Posission: (0,19)
+	HP: 500
+	Attack: 40 per 10 sec
+	Attack Radius: 1
+
+Road Tiles:
+	Manuverability: 1.0
+	posission: (0,0:5, 11:18)
+
+Hard Tarrain Tile
+	Manuverability: 0.25
+	posission: (0,6:8)
+
+Engineered Road:
+	Manuverability: 1.5
+	posission: (0,9:10)
+
+Soldier:
+	Speed: 1 Tile every Sec
+	HP: 100
+	Attack: 25 per 1 sec
+	Attack Range: 1 Tile
+	NumOfsoleiders
