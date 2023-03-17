@@ -7,25 +7,18 @@ from sprites.tile import Tile, TileObject
 from sprites.roads import Road
 from sprites.tower import Tower
 from sprites.soldier import Soldier
-
+from utils import grid
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 400
 FPS = 60
-
-GRID_START_POS = (150, 200)
-INIT_GRID = (
-    (None, None, None, None, TileObject.TARGETING_TOWER, None, None, None, None, None,
-     None, None, None, None, None, None, None, None, None, None),
-    (TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.ENGINEERED_ROAD,
-     TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD)
-)
 
 
 def init_tiles_groups():
     all_sprites = pg.sprite.RenderPlain()
     roads = pg.sprite.Group()
     towers = pg.sprite.Group()
+    GRID_START_POS, INIT_GRID = grid.load_map_from_file('docs/test_level.json')
 
     for i, grid_row in enumerate(INIT_GRID):
         for j, tile_object in enumerate(grid_row):
@@ -35,7 +28,7 @@ def init_tiles_groups():
 
             all_sprites.add(tile)
 
-            if tile_object is not None:
+            if tile_object is not TileObject.EMPTY:
                 populated_obj = tile.populate_tile(tile_object)
                 all_sprites.add(populated_obj)
 
@@ -50,6 +43,7 @@ def init_tiles_groups():
 
 def main():
     pg.init()
+
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     background = pg.Surface(screen.get_size())
     clock = pg.time.Clock()
@@ -58,11 +52,10 @@ def main():
     all_sprites, roads, towers = init_tiles_groups()
     soldiers = pg.sprite.Group()
 
-    soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
-    soldier_0.start_movement()
 
-    soldiers.add(soldier_0)
-    all_sprites.add(soldier_0)
+    # soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
+    # soldier_0.start_movement()
+    # all_sprites.add(soldier_0)
 
     while running:
         for event in pg.event.get():
@@ -70,7 +63,7 @@ def main():
                 running = False
 
         screen.blit(background, (0, 0))
-        
+
         set_soldiers_manuverability(soldiers, roads)
         towers_fire_management(towers, soldiers)
 
