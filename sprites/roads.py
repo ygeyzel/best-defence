@@ -29,7 +29,7 @@ class Road(pg.sprite.Sprite):
 
         self.state_stats_dict = {
             RoadState.REGULAR: Road.RoadStats(_load_road_image("road"), 1),
-            RoadState.HARD: Road.RoadStats(_load_road_image("road-blocked"), 0.25),
+            RoadState.HARD: Road.RoadStats(_load_road_image("road-blocked"), 0.75),
             RoadState.ENGINEERED: Road.RoadStats(
                 _load_road_image("road-eng"), 1.5)
         }

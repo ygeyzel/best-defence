@@ -1,5 +1,6 @@
 import pygame as pg
 from utils.common import TILE_WIDTH
+from gameplay.movement import set_soldiers_manuverability
 from sprites.tile import Tile, TileObject
 from sprites.roads import Road
 from sprites.tower import Tower
@@ -9,15 +10,6 @@ from utils import grid
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 400
 FPS = 60
-
-
-# GRID_START_POS = (150, 200)
-# INIT_GRID = (
-#     (None, None, None, None, TileObject.TARGETING_TOWER, TileObject.TARGETING_TOWER, None, None, None, None,
-#      None, None, None, None, None, None, None, None, None, None),
-#     (TileObject.REGULAR_ROAD, TileObject.TARGETING_TOWER, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.ENGINEERED_ROAD,
-#      TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD)
-# )
 
 
 def init_tiles_groups():
@@ -56,18 +48,21 @@ def main():
     running = True
 
     all_sprites, roads, towers = init_tiles_groups()
+    soldiers = pg.sprite.Group()
+
 
     # soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
     # soldier_0.start_movement()
     # all_sprites.add(soldier_0)
-
+    
     while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
 
         screen.blit(background, (0, 0))
-
+        
+        set_soldiers_manuverability(soldiers, roads)
         all_sprites.update()
         all_sprites.draw(screen)
         pg.display.flip()
