@@ -1,0 +1,33 @@
+The game is a single player reverse tower defense.
+where he player summon soldier and uses different abilities/spells
+in order to destroy the enemy tower and bases.
+
+The game is played in real time but the player can pause the game.
+
+While time is progressing the player can use the dice they acquire at the start of the game (20).
+
+dices determine which ability the player can use out of three options:
+Recruit - add soldiers to the player army
+Blast - Deal damage to one of the enemy towers
+Build - upgrade one tile to increase your soldiers speed.
+
+Tile: the base object of the game grid, holds its owen location
+Empty - tile has nothing occupying it.
+Castel - this destination of the soldiers movement
+Tower - a tile which soldiers can't walk through.
+
+Road: tiles which gives moving soldiers extra speed
+Open - movement on this tile is normal
+Blocked - movement on this tile is slowed
+Railed - movement on this tile is fast
+Soldiers: small characters the player can summon,  used to attack the enemy base.
+
+Towers: located on tiles along the road, damaging the closest soldier to the castle in range.
+Tower a - single target.
+Tower b - area of effect, lower damage than single target
+Castel: the enemy base, attacks soldiers in range, when destroyed the player wins the game.
+
+Lose condition
+The player  loses the game if he uses all of his dice and he has no living soldiers on the field.
+	
+
