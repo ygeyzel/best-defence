@@ -11,6 +11,8 @@ class SoldierState(Enum):
 class Soldier(pg.sprite.Sprite):
 
     def __init__(self, max_hp: float, speed: float, damage: float):
+        pg.sprite.Sprite.__init__(self)
+
         self.max_hp = max_hp
         self.hp = max_hp
         self.speed = speed
