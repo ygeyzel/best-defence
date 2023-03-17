@@ -9,7 +9,7 @@ FPS = 60
 
 GRID_START_POS = (150, 200)
 INIT_GRID = (
-    (None, None, None, None, None, None, None, None, None, None,
+    (None, None, None, None, TileObject.TARGETING_TOWER, None, None, None, None, None,
      None, None, None, None, None, None, None, None, None, None),
     (TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.ENGINEERED_ROAD,
      TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD, TileObject.HARD_ROAD, TileObject.REGULAR_ROAD, TileObject.REGULAR_ROAD)

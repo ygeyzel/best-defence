@@ -50,3 +50,8 @@ class Road(pg.sprite.Sprite):
         self._state = val
         self.image = self.state_stats_dict[val].image
         self.manuverability = self.state_stats_dict[val].manuverability
+
+
+def road_factory(pos: Tuple[float, float], init_state: RoadState) -> Road:
+    road = Road(pos, init_state)
+    return road
