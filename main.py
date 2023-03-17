@@ -1,6 +1,7 @@
 import pygame as pg
 from utils.common import TILE_WIDTH
 from gameplay.movement import set_soldiers_manuverability
+from gameplay.mouseactions import highlight_tile_under_mouse
 from sprites.tile import Tile, TileObject
 from sprites.roads import Road
 from sprites.tower import Tower
@@ -24,6 +25,7 @@ def init_tiles_groups():
     all_sprites = pg.sprite.RenderPlain()
     roads = pg.sprite.Group()
     towers = pg.sprite.Group()
+    tiles = pg.sprite.Group()
 
     for i, grid_row in enumerate(INIT_GRID):
         for j, tile_object in enumerate(grid_row):
@@ -31,6 +33,7 @@ def init_tiles_groups():
             y = GRID_START_POS[1] + TILE_WIDTH * i
             tile = Tile((x, y))
 
+            tiles.add(tile)
             all_sprites.add(tile)
 
             if tile_object is not None:
@@ -43,7 +46,7 @@ def init_tiles_groups():
                 if isinstance(populated_obj, Tower):
                     towers.add(populated_obj)
 
-    return all_sprites, roads, towers
+    return all_sprites, roads, towers, tiles
 
 
 def main():
@@ -53,10 +56,10 @@ def main():
     clock = pg.time.Clock()
     running = True
 
-    all_sprites, roads, towers = init_tiles_groups()
+    all_sprites, roads, towers, tiles = init_tiles_groups()
     soldiers = pg.sprite.Group()
 
-    soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
+    soldier_0 = Soldier((150, 243), 200, 2, 50) # temp
     soldier_0.start_movement()
 
     soldiers.add(soldier_0)
@@ -66,12 +69,15 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
+            if event.type == pg.MOUSEMOTION:
+                highlight_tile_under_mouse(tiles)
 
         screen.blit(background, (0, 0))
         
         set_soldiers_manuverability(soldiers, roads)
         all_sprites.update()
         all_sprites.draw(screen)
+        highlight_tile_under_mouse(tiles)
         pg.display.flip()
         clock.tick(FPS)
 

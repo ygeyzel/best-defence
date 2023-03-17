@@ -20,9 +20,13 @@ class Tile(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
 
         self.tile_object = None
+        self.is_highlighted = False
         self.image, self.rect = load_image(
             'tiles/empty.png', (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
+    
+    def update(self):
+        self.draw_frame()
 
     def populate_tile(self, tile_object: TILE_WIDTH) -> pg.sprite.Sprite:
         assert self.tile_object is None
@@ -41,4 +45,17 @@ class Tile(pg.sprite.Sprite):
         new_sprite_params = objects_factory_dict[tile_object][1:]
         new_sprite = new_sprite_type(pos, *new_sprite_params)
 
+        self.tile_object = new_sprite
         return new_sprite
+
+    def is_collide_with_mouse(self) -> bool:
+        mouse = pg.mouse.get_pos()
+        collide = self.rect.collidepoint(mouse)
+        return collide
+    
+    def draw_frame(self):
+        color = (255, 0, 0) if self.is_highlighted else (0, 0, 0)
+        surface = self.tile_object.image if self.tile_object else self.image
+        pg.draw.rect(surface, color, [0, 0, TILE_WIDTH, TILE_WIDTH], 1)
+
+
