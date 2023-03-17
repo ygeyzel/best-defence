@@ -4,14 +4,14 @@
     { "type": "REGULAR_ROAD", "symble": "RR" },
     { "type": "HARD_ROAD", "symble": "HR" },
     { "type": "ENGINEERED_ROAD", "symble": "UR" },
-    { "type": "TARGETING_TOWER", "symble": "T" },
-    { "type": "CASTLE", "symble": "C" },
-    { "type": "EMPTY", "symble": "E" },
-    { "type": "BARRACKS", "symble": "B" }
+    { "type": "TARGETING_TOWER", "symble": "TT" },
+    { "type": "CASTLE", "symble": "CS" },
+    { "type": "EMPTY", "symble": "ET" },
+    { "type": "BARRACKS", "symble": "BR" }
   ],
   "positions": [
-    ["E","E","E","E","E","E","T","E","E","E","T","E","E","E","T","E","E","E","E","E"],
-    ["B","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","C"]
+    ["ET,ET,ET,ET,ET,ET,TT,ET,ET,ET,TT,ET,ET,ET,TT,ET,ET,ET,ET,ET"], 
+    ["BR,UR,UR,HR,HR,RR,HR,RR,RR,HR,RR,RR,RR,RR,HR,HR,HR,HR,RR,CS"]
   ],
   "gridStartPos": {
     "x": 150 ,
