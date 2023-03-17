@@ -1,4 +1,6 @@
 import pygame as pg
+
+from gameplay.general_fire_management import towers_fire_management
 from utils.common import TILE_WIDTH
 from gameplay.movement import set_soldiers_manuverability
 from sprites.tile import Tile, TileObject
@@ -70,6 +72,8 @@ def main():
         screen.blit(background, (0, 0))
         
         set_soldiers_manuverability(soldiers, roads)
+        towers_fire_management(towers, soldiers)
+
         all_sprites.update()
         all_sprites.draw(screen)
         pg.display.flip()
