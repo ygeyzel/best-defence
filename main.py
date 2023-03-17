@@ -5,7 +5,7 @@ from sprites.tile import Tile, TileObject
 from sprites.roads import Road
 from sprites.tower import Tower
 from sprites.soldier import Soldier
-from utils import grid 
+from utils import grid
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 400
@@ -17,7 +17,7 @@ def init_tiles_groups():
     roads = pg.sprite.Group()
     towers = pg.sprite.Group()
     GRID_START_POS, INIT_GRID = grid.load_map_from_file('docs/test_level.json')
-    print(INIT_GRID)
+
     for i, grid_row in enumerate(INIT_GRID):
         for j, tile_object in enumerate(grid_row):
             x = GRID_START_POS[0] + TILE_WIDTH * j
@@ -54,14 +54,14 @@ def main():
     # soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
     # soldier_0.start_movement()
     # all_sprites.add(soldier_0)
-    
+
     while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
 
         screen.blit(background, (0, 0))
-        
+
         set_soldiers_manuverability(soldiers, roads)
         all_sprites.update()
         all_sprites.draw(screen)
