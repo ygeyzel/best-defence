@@ -32,6 +32,9 @@ class Soldier(pg.sprite.Sprite):
         self.rect.x, self.rect.y = pos
 
     def update(self):
+        if self.hp <= 0:
+            self.kill_soldier()
+
         if not self.manuverability_factor:
             self.manuverability_factor = 1
 
@@ -42,3 +45,5 @@ class Soldier(pg.sprite.Sprite):
     def start_movement(self):
         self.state = SoldierState.ADVANCE
 
+    def kill_soldier(self):
+        self.kill()
