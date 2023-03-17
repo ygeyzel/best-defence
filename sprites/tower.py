@@ -63,7 +63,6 @@ class Tower(pg.sprite.Sprite):
         tower_pos_tiles = (self.rect.x/common.TILE_WIDTH, self.rect.y/common.TILE_WIDTH)
         soldier_pos_tiles = (soldier.rect.x/common.TILE_WIDTH, soldier.rect.y/common.TILE_WIDTH)
         distance_to_target = dist(tower_pos_tiles, soldier_pos_tiles)
-        print(f" dist is {distance_to_target}")
         if distance_to_target <= self.attack_range:
             return True
         else:
@@ -79,7 +78,6 @@ class Tower(pg.sprite.Sprite):
     def fire_on_target(self, target):
         if target:
             target.hp = target.hp - self.damage
-            print(f"Fire! Target HP is {target.hp}")
             # TO DO: CHECK SOLDIER IS ALIVE?
 
     def update(self):
