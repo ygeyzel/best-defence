@@ -30,12 +30,15 @@ class Soldier(pg.sprite.Sprite):
         self.pos = pos
 
         self.damage = 100
-
+        self.attack_offset_flag = True
+        self.animation_counter = 0
+        
         self.manuverability_factor = 1
 
         self.image, self.rect = load_image(
             'soldiers/soldier.png', (SOLDIER_WIDTH, SOLDIER_WIDTH), (0, 0, 0))
         self.rect.x, self.rect.y = pos
+
 
     def update(self):
         if self.hp <= 0:
@@ -49,7 +52,13 @@ class Soldier(pg.sprite.Sprite):
             self.rect.move_ip((actual_speed, 0))
 
         if self.state == SoldierState.ATTACK:
-            print('ATTACK')
+            if self.animation_counter == 10:
+                offset = 10 if self.attack_offset_flag else -10 
+                self.rect.move_ip((offset, 0))
+                self.attack_offset_flag = not self.attack_offset_flag
+                self.animation_counter = 0
+            else: 
+                self.animation_counter += 1
 
     def start_movement(self):
         self.state = SoldierState.ADVANCE
