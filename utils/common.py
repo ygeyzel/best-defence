@@ -7,3 +7,7 @@ IMAGES_DIR = os.path.join(RES_DIR, "images")
 SOUNDS_DIR = os.path.join(RES_DIR, "sounds")
 
 TILE_WIDTH = 35
+
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 400
+FPS = 60
