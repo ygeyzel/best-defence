@@ -3,11 +3,13 @@ import pygame as pg
 from gameplay.tower_management import towers_management
 from gameplay.mouseactions import highlight_tile_under_mouse, handle_mouse_click
 from gameplay.soldiers_management import soldiers_management
+from gameplay.game_stats import GameStatsManager
 from sprites.soldier import Soldier
 from utils.grid import init_tiles_groups
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 400
+INIT_ROLLS = 20
 FPS = 60
 
 
@@ -19,12 +21,15 @@ def main():
     clock = pg.time.Clock()
     running = True
 
-    sprite_groups = init_tiles_groups('levels/test_level.json')
+    game_stats_manager = GameStatsManager(INIT_ROLLS)
+
+    sprite_groups = init_tiles_groups('levels/test_level.json', game_stats_manager)
     sprite_groups["soldiers"] = pg.sprite.Group()
 
     soldier_0 = Soldier((150, 240), 2000000000, 2, 50) # temp
     sprite_groups["soldiers"].add(soldier_0)
     sprite_groups["all_sprites"].add(soldier_0)
+
 
     while running:
         for event in pg.event.get():
@@ -43,8 +48,6 @@ def main():
         sprite_groups["soldiers"].clear(screen, background)
 
         sprite_groups["all_sprites"].draw(screen)
-
-        highlight_tile_under_mouse(sprite_groups["tiles"])
 
         pg.display.flip()
         clock.tick(FPS)

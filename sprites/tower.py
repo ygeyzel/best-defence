@@ -4,7 +4,6 @@ from typing import Tuple
 import pygame as pg
 from utils.resources import load_image
 from utils.common import TILE_WIDTH
-from sprites.dashboard import Dashboard
 import time
 import os
 from math import dist
@@ -112,7 +111,7 @@ class Tower(pg.sprite.Sprite):
 
 class TowerType(Enum):
     TARGETING = TowerStats(max_hp=150, damage=20, attack_delay=0.5,
-                           attack_range=5, tower_image="tower-1.png")
+                           attack_range=5, tower_images_dir="tower-1")
 
 
 def tower_factory(pos: Tuple[float, float], tower_type: TowerType) -> Tower:
