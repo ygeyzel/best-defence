@@ -7,8 +7,8 @@ from utils.common import TILE_WIDTH
 
 
 class RoadState(Enum):
-    REGULAR = 0
-    HARD = 1
+    HARD = 0
+    REGULAR = 1
     ENGINEERED = 2
 
 
