@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from enum import auto, Enum
+from enum import Enum
 from typing import Tuple
 import pygame as pg
 from utils.resources import load_image
