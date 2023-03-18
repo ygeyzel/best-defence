@@ -7,9 +7,9 @@ from utils.common import TILE_WIDTH
 
 
 class RoadState(Enum):
-    REGULAR = auto()
-    HARD = auto()
-    ENGINEERED = auto()
+    HARD = 0
+    REGULAR = 1
+    ENGINEERED = 2
 
 
 def _load_road_image(image_name: str) -> pg.surface.Surface:
@@ -50,6 +50,10 @@ class Road(pg.sprite.Sprite):
         self._state = val
         self.image = self.state_stats_dict[val].image
         self.manuverability = self.state_stats_dict[val].manuverability
+
+    def upgrade(self):
+        assert self.state.value < RoadState.ENGINEERED.value
+        self.state = RoadState(self.state.value + 1)
 
 
 def road_factory(pos: Tuple[float, float], init_state: RoadState) -> Road:

@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Tuple
 import pygame as pg
 from utils.resources import load_image

@@ -1,9 +1,9 @@
 import pygame as pg
 
 from gameplay.general_fire_management import towers_fire_management
+from gameplay.mouseactions import highlight_tile_under_mouse, handle_mouse_click
 from gameplay.main_soldier_interact import set_soldiers_manuverability
 from gameplay.main_soldier_interact import draw_soldiers_hp_bar
-from gameplay.mouseactions import highlight_tile_under_mouse
 from sprites.soldier import Soldier
 from utils.grid import init_tiles_groups
 
@@ -33,6 +33,8 @@ def main():
                 running = False
             if event.type == pg.MOUSEMOTION:
                 highlight_tile_under_mouse(tiles)
+            if event.type == pg.MOUSEBUTTONDOWN:
+                handle_mouse_click(tiles)
 
         screen.blit(background, (0, 0))
 
