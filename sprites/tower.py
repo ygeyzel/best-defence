@@ -87,12 +87,9 @@ class Tower(pg.sprite.Sprite):
             if down < self.hp <= up:
                 self.image, _ = load_image(self.images[image_num], (TILE_WIDTH, TILE_WIDTH))
 
-
-    def artillery_hit(self, dashboard: Dashboard, hit_hp: int = DEFULTE_ARTILLERY_DAMAGE):
-        if dashboard.is_can_artillery:
-            dashboard.artillery -= 1
-            self.hp = max(0, self.hp - hit_hp)
-            self.update_image()
+    def artillery_hit(self, hit_hp: int = DEFULTE_ARTILLERY_DAMAGE):
+        self.hp = max(0, self.hp - hit_hp)
+        self.update_image()
 
     def fire_management(self, soldiers):
         if (not self.is_destroyed) and self.attack_timer():
