@@ -19,7 +19,7 @@ def main():
     clock = pg.time.Clock()
     running = True
 
-    sprite_groups = init_tiles_groups('docs/test_level.json')
+    sprite_groups = init_tiles_groups('levels/test_level.json')
     sprite_groups["soldiers"] = pg.sprite.Group()
 
     soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
