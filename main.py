@@ -44,8 +44,6 @@ def main():
 
         sprite_groups["all_sprites"].draw(screen)
 
-        highlight_tile_under_mouse(sprite_groups["tiles"])
-
         pg.display.flip()
         clock.tick(FPS)
 
