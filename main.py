@@ -24,6 +24,7 @@ def main():
     soldiers = pg.sprite.Group()
 
     soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
+    soldiers.add(soldier_0)
     all_sprites.add(soldier_0)
 
     while running:
@@ -39,9 +40,11 @@ def main():
         towers_fire_management(towers, soldiers)
 
         all_sprites.update()
+        soldiers.clear(screen, background)
+
         all_sprites.draw(screen)
 
-        draw_soldiers_hp_bar(soldiers, screen)
+        draw_soldiers_hp_bar(soldiers)
         highlight_tile_under_mouse(tiles)
 
         pg.display.flip()

@@ -9,12 +9,11 @@ MAX_HP = 100
 
 HP_BAR_WIDTH = 15
 HP_BAR_HEIGHT = 5
-HP_BAR_HEIGHT_OFFSET = 10
+HP_BAR_HEIGHT_OFFSET = 5
 HP_BAR_CLR = (255, 128, 0)
 
 
 class SoldierState(Enum):
-    WAIT = auto()
     ADVANCE = auto()
     ATTACK = auto()
 
@@ -27,7 +26,7 @@ class Soldier(pg.sprite.Sprite):
         self.max_hp = max_hp
         self.hp = max_hp
         self.speed = speed
-        self.state = SoldierState.WAIT
+        self.state = SoldierState.ADVANCE
         self.pos = pos
 
         self.manuverability_factor = 1
@@ -53,9 +52,8 @@ class Soldier(pg.sprite.Sprite):
     def kill_soldier(self):
         self.kill()
 
-    def draw_hp_bar(self, screen):
+    def draw_hp_bar(self):
         remaining_hp_part = self.hp/self.max_hp
         hp_bar_color = [(1-remaining_hp_part) * HP_BAR_CLR[0], remaining_hp_part * HP_BAR_CLR[1], HP_BAR_CLR[2]]
-        pg.draw.rect(screen, hp_bar_color, (self.rect.x, self.rect.y - HP_BAR_HEIGHT_OFFSET,
-                                            HP_BAR_WIDTH * remaining_hp_part, HP_BAR_HEIGHT))
-
+        pg.draw.rect(self.image, (0, 0, 0), (0, 0, HP_BAR_WIDTH, HP_BAR_HEIGHT))
+        pg.draw.rect(self.image, hp_bar_color, (0, 0, HP_BAR_WIDTH * remaining_hp_part, HP_BAR_HEIGHT))
