@@ -19,7 +19,7 @@ def main():
     clock = pg.time.Clock()
     running = True
 
-    all_sprites, roads, towers = init_tiles_groups('docs/test_level.json')
+    all_sprites, roads, towers, tiles = init_tiles_groups('docs/test_level.json')
     soldiers = pg.sprite.Group()
 
     soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
@@ -29,8 +29,8 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
-            # if event.type == pg.MOUSEMOTION:
-            #     highlight_tile_under_mouse(tiles)
+            if event.type == pg.MOUSEMOTION:
+                highlight_tile_under_mouse(tiles)
 
         screen.blit(background, (0, 0))
 
@@ -39,7 +39,7 @@ def main():
 
         all_sprites.update()
         all_sprites.draw(screen)
-        # highlight_tile_under_mouse(tiles)
+        highlight_tile_under_mouse(tiles)
         pg.display.flip()
         clock.tick(FPS)
 

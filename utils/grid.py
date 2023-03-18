@@ -26,6 +26,7 @@ def init_tiles_groups(level_file_path: str):
     all_sprites = pg.sprite.RenderPlain()
     roads = pg.sprite.Group()
     towers = pg.sprite.Group()
+    tiles = pg.sprite.Group()
     GRID_START_POS, INIT_GRID = load_map_from_file(level_file_path)
 
     for i, grid_row in enumerate(INIT_GRID):
@@ -34,6 +35,7 @@ def init_tiles_groups(level_file_path: str):
             y = GRID_START_POS[1] + TILE_WIDTH * i
             tile = Tile((x, y))
 
+            tiles.add(tile)
             all_sprites.add(tile)
 
             if tile_object is not TileObject.EMPTY:
@@ -46,6 +48,6 @@ def init_tiles_groups(level_file_path: str):
                 if isinstance(populated_obj, Tower):
                     towers.add(populated_obj)
 
-    return all_sprites, roads, towers
+    return all_sprites, roads, towers, tiles
 
 
