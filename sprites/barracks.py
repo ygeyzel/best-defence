@@ -10,7 +10,7 @@ class Barracks(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
 
         barracks_image = "tiles/barracks.png"
-        self.image, self.rect = load_image(barracks_image)
+        self.image, self.rect = load_image(barracks_image, (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
 
 def barracks_factory(pos: Tuple[float, float], _) -> Barracks:
