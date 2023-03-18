@@ -2,8 +2,7 @@ import pygame as pg
 
 from gameplay.tower_management import towers_management
 from gameplay.mouseactions import highlight_tile_under_mouse, handle_mouse_click
-from gameplay.main_soldier_interact import set_soldiers_manuverability
-from gameplay.main_soldier_interact import draw_soldiers_hp_bar, update_soldiers_state
+from gameplay.soldiers_management import soldiers_management
 from sprites.soldier import Soldier
 from utils.grid import init_tiles_groups
 
@@ -38,17 +37,15 @@ def main():
 
         screen.blit(background, (0, 0))
 
-        set_soldiers_manuverability(sprite_groups["soldiers"], sprite_groups["roads"])
         towers_management(sprite_groups["towers"], sprite_groups["soldiers"])
+        soldiers_management(sprite_groups["soldiers"], sprite_groups["roads"], sprite_groups["castle"])
 
         sprite_groups["all_sprites"].update()
         sprite_groups["soldiers"].clear(screen, background)
 
         sprite_groups["all_sprites"].draw(screen)
 
-        draw_soldiers_hp_bar(sprite_groups["soldiers"])
         highlight_tile_under_mouse(sprite_groups["tiles"])
-        update_soldiers_state(sprite_groups["soldiers"], sprite_groups["castle"])
 
         pg.display.flip()
         clock.tick(FPS)
