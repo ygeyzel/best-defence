@@ -22,7 +22,7 @@ def main():
     sprite_groups = init_tiles_groups('docs/test_level.json')
     sprite_groups["soldiers"] = pg.sprite.Group()
 
-    soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
+    soldier_0 = Soldier((150, 240), 2000000000, 2, 50) # temp
     sprite_groups["soldiers"].add(soldier_0)
     sprite_groups["all_sprites"].add(soldier_0)
 
@@ -39,7 +39,6 @@ def main():
 
         towers_management(sprite_groups["towers"], sprite_groups["soldiers"])
         soldiers_management(sprite_groups["soldiers"], sprite_groups["roads"], sprite_groups["castle"])
-
         sprite_groups["all_sprites"].update()
         sprite_groups["soldiers"].clear(screen, background)
 

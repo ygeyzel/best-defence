@@ -29,6 +29,8 @@ class Soldier(pg.sprite.Sprite):
         self.state = SoldierState.ADVANCE
         self.pos = pos
 
+        self.damage = 100
+
         self.manuverability_factor = 1
 
         self.image, self.rect = load_image(
@@ -46,11 +48,19 @@ class Soldier(pg.sprite.Sprite):
             actual_speed = self.speed * self.manuverability_factor
             self.rect.move_ip((actual_speed, 0))
 
+        if self.state == SoldierState.ATTACK:
+            print('ATTACK')
+
     def start_movement(self):
         self.state = SoldierState.ADVANCE
 
     def kill_soldier(self):
         self.kill()
+
+
+    def damage_castle(self, castle):
+        castle.hp = castle.hp - self.damage
+
 
     def draw_hp_bar(self):
         remaining_hp_part = self.hp/self.max_hp
