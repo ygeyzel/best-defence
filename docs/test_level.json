@@ -1,8 +1,0 @@
-{
-  "name": "test1",
-  "positions": [
-    ["E","E","E","E","E","E","T","E","E","E","T","E","E","E","T","E","E","E","E","E"],
-    ["B","RR","RR","RR","RR","RR","RR","RR","RR","RR","RR","T","RR","RR","RR","RR","RR","RR","RR","C"]
-  ],
-  "gridStartPos": [150, 200] 
-}

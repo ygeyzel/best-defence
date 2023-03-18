@@ -1,9 +1,0 @@
-{
-    "RR" : "REGULAR_ROAD",
-    "HR" : "HARD_ROAD",
-    "UR" : "ENGINEERED_ROAD",
-    "T" : "TARGETING_TOWER",
-    "C" : "CASTLE",
-    "E" : "EMPTY",
-    "B" : "BARRACKS"
-}

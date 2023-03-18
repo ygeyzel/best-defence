@@ -1,0 +1,8 @@
+{
+  "name": "test1",
+  "positions": [
+    ["EP","EP","EP","EP","EP","EP","TT","EP","EP","EP","TT","EP","EP","EP","TT","EP","EP","EP","EP","EP"],
+    ["BR","RR","RR","RR","HR","UR","RR","HR","RR","RR","RR","HR","RR","RR","RR","RR","RR","RR","RR","CS"]
+  ],
+  "gridStartPos": [150, 200] 
+}

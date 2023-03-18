@@ -8,6 +8,13 @@ import time
 from math import dist
 
 
+HP_BAR_WIDTH = TILE_WIDTH
+HP_BAR_HEIGHT = 5
+HP_BAR_HEIGHT_OFFSET = 5
+HP_BAR_CLR = (255, 128, 0)
+
+
+
 @dataclass
 class TowerStats:
     max_hp: float
@@ -29,7 +36,8 @@ class Tower(pg.sprite.Sprite):
         self.damage = stats.damage
 
         tower_image = f"towers/{stats.tower_image}"
-        self.image, self.rect = load_image(tower_image, (TILE_WIDTH, TILE_WIDTH))
+        self.image, self.rect = load_image(
+            tower_image, (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
         self.last_shot_time_stamp = time.time()
 
@@ -61,7 +69,8 @@ class Tower(pg.sprite.Sprite):
 
     def is_soldier_valid_target(self, soldier):
         tower_pos_tiles = (self.rect.x/TILE_WIDTH, self.rect.y/TILE_WIDTH)
-        soldier_pos_tiles = (soldier.rect.x/TILE_WIDTH, soldier.rect.y/TILE_WIDTH)
+        soldier_pos_tiles = (soldier.rect.x/TILE_WIDTH,
+                             soldier.rect.y/TILE_WIDTH)
         distance_to_target = dist(tower_pos_tiles, soldier_pos_tiles)
         if distance_to_target <= self.attack_range:
             return True
@@ -78,10 +87,16 @@ class Tower(pg.sprite.Sprite):
     def fire_on_target(self, target):
         if target:
             target.hp = target.hp - self.damage
-            # TO DO: CHECK SOLDIER IS ALIVE?
 
-    def update(self):
-        pass
+    def draw_hp_bar(self):
+        remaining_hp_part = max(self.hp, 0) / self.max_hp
+        hp_bar_color = [(1-remaining_hp_part) * HP_BAR_CLR[0],
+                        remaining_hp_part * HP_BAR_CLR[1], HP_BAR_CLR[2]]
+        pg.draw.rect(self.image, (0, 0, 0),
+                     (0, 0, HP_BAR_WIDTH, HP_BAR_HEIGHT))
+        pg.draw.rect(self.image, hp_bar_color,
+                     (0, 0, HP_BAR_WIDTH * remaining_hp_part, HP_BAR_HEIGHT))
+
 
 class TowerType(Enum):
     TARGETING = TowerStats(max_hp=150, damage=20, attack_delay=0.5,
@@ -91,4 +106,3 @@ class TowerType(Enum):
 def tower_factory(pos: Tuple[float, float], tower_type: TowerType) -> Tower:
     tower = Tower(pos, tower_type.value)
     return tower
-

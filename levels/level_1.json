@@ -1,0 +1,18 @@
+{
+    "name": "level_1",
+  "positions": [
+    ["EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP"],
+    ["EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP"],
+    ["EP","EP","EP","EP","EP","EP","TT","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP"],
+    ["BR","UR","RR","RR","RR","HR","HR","RR","RR","HR","HR","HR","HR","RR","TT","EP","EP","EP","EP","EP"],
+    ["EP","EP","EP","EP","EP","EP","EP","EP","HR","EP","TT","EP","EP","RR","EP","EP","EP","EP","EP","EP"],
+    ["EP","EP","EP","EP","EP","EP","EP","EP","HR","RR","RR","RR","RR","RR","TT","EP","EP","EP","HR","HR"],
+    ["EP","EP","EP","EP","EP","EP","EP","EP","HR","EP","TT","EP","EP","RR","HR","HR","HR","RR","RR","CS"],
+    ["BR","UR","RR","RR","RR","HR","HR","RR","RR","HR","HR","HR","HR","RR","TT","EP","TT","EP","HR","HR"],
+    ["EP","EP","EP","EP","EP","EP","TT","EP","EP","EP","TT","EP","EP","EP","EP","EP","EP","EP","EP","EP"],
+    ["EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP"],
+    ["EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP","EP"]
+    
+  ],
+  "gridStartPos": [150, 200] 
+}
