@@ -8,7 +8,7 @@ from sprites.castle import Castle
 from utils.common import TILE_WIDTH
 
 
-def load_map_from_file(map_file_path: str, tile_set='docs/tile_set.json'): #grop,
+def load_map_from_file(map_file_path: str, tile_set='levels/tile_set.json'): #grop,
     with open(tile_set, 'r') as f:
         tiles_set = json.load(f)
 
