@@ -4,15 +4,11 @@ import pygame as pg
 from sprites.roads import road_factory, RoadState, Road
 from sprites.tower import tower_factory, TowerType, Tower
 from sprites.barracks import barracks_factory, Barracks
-from sprites.castle import castle_factory
+from sprites.castle import castle_factory, Castle
+from gameplay.game_stats import GameStatsManager, TileAction
 from utils.resources import load_image
 from utils.common import TILE_WIDTH
 
-
-class TileMouseAction(Enum):
-    ATTACK = auto()
-    ENGINEERING = auto()
-    DRAFT = auto()
 
 
 class TileObject(Enum):
@@ -27,11 +23,13 @@ class TileObject(Enum):
 
 class Tile(pg.sprite.Sprite):
 
-    def __init__(self, pos: Tuple[float, float]):
+    def __init__(self, pos: Tuple[float, float], game_stats_manager: GameStatsManager):
         pg.sprite.Sprite.__init__(self)
 
         self.tile_object = None
         self.is_highlighted = False
+
+        self.game_stats_manager = game_stats_manager
         self.image, self.rect = load_image(
             'tiles/empty.png', (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
@@ -71,11 +69,11 @@ class Tile(pg.sprite.Sprite):
         surface = self.tile_object.image if self.tile_object else self.image
         pg.draw.rect(surface, color, [0, 0, TILE_WIDTH, TILE_WIDTH], 1)
 
-    def mouse_action(self) -> Optional[TileMouseAction]:
+    def mouse_action(self) -> Optional[TileAction]:
         mouse_action_switch = {
-            Road: TileMouseAction.ENGINEERING,
-            Tower: TileMouseAction.ATTACK,
-            Barracks: TileMouseAction.DRAFT
+            Road: TileAction.ENGINEERING,
+            Tower: TileAction.ARTILLERY,
+            Barracks: TileAction.RECRUIT
         }
 
         action = mouse_action_switch.get(type(self.tile_object))
@@ -84,20 +82,12 @@ class Tile(pg.sprite.Sprite):
     def is_mouse_action_active(self) -> bool:
         action = self.mouse_action()
 
-        ################  TEMP  ####################
-        if action == TileMouseAction.ENGINEERING:
-            return self.tile_object.state != RoadState.ENGINEERED
+        if action is None:
+            return False
 
-        return False
-        ############################################
+        return self.game_stats_manager.is_action_avialable(action, self.tile_object)
 
     def preform_mouse_action(self):
-        action_func_switch = {
-            TileMouseAction.ENGINEERING: Road.upgrade
-        }
         
         if self.is_mouse_action_active():
-            action = self.mouse_action()
-            action_func = action_func_switch[action]
-
-            action_func(self.tile_object)
+            self.game_stats_manager.preform_action(self.mouse_action(), self.tile_object)
