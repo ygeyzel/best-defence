@@ -2,7 +2,8 @@ import pygame as pg
 
 from gameplay.general_fire_management import towers_fire_management
 from utils.common import TILE_WIDTH
-from gameplay.movement import set_soldiers_manuverability
+from gameplay.main_soldier_interact import set_soldiers_manuverability
+from gameplay.main_soldier_interact import draw_soldiers_hp_bar
 from sprites.tile import Tile, TileObject
 from sprites.roads import Road
 from sprites.tower import Tower
@@ -76,6 +77,9 @@ def main():
 
         all_sprites.update()
         all_sprites.draw(screen)
+
+        draw_soldiers_hp_bar(soldiers, screen)
+
         pg.display.flip()
         clock.tick(FPS)
 
