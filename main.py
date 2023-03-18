@@ -3,7 +3,7 @@ import pygame as pg
 from gameplay.general_fire_management import towers_fire_management
 from gameplay.mouseactions import highlight_tile_under_mouse, handle_mouse_click
 from gameplay.main_soldier_interact import set_soldiers_manuverability
-from gameplay.main_soldier_interact import draw_soldiers_hp_bar
+from gameplay.main_soldier_interact import draw_soldiers_hp_bar, update_soldiers_state
 from sprites.soldier import Soldier
 from utils.grid import init_tiles_groups
 
@@ -20,7 +20,7 @@ def main():
     clock = pg.time.Clock()
     running = True
 
-    all_sprites, roads, towers, tiles = init_tiles_groups('docs/test_level.json')
+    all_sprites, roads, towers, tiles, castels = init_tiles_groups('docs/test_level.json')
     soldiers = pg.sprite.Group()
 
     soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
@@ -48,6 +48,7 @@ def main():
 
         draw_soldiers_hp_bar(soldiers)
         highlight_tile_under_mouse(tiles)
+        update_soldiers_state(soldiers, castels)
 
         pg.display.flip()
         clock.tick(FPS)

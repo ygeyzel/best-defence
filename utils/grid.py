@@ -5,6 +5,7 @@ from utils.common import TILE_WIDTH
 from sprites.tile import Tile, TileObject
 from sprites.roads import Road
 from sprites.tower import Tower
+from sprites.castle import Castle
 
 
 def load_map_from_file(map_file_path: str, tile_set='docs/tile_set.json'): #grop,
@@ -27,6 +28,7 @@ def init_tiles_groups(level_file_path: str):
     roads = pg.sprite.Group()
     towers = pg.sprite.Group()
     tiles = pg.sprite.Group()
+    castles = pg.sprite.Group()
     GRID_START_POS, INIT_GRID = load_map_from_file(level_file_path)
 
     for i, grid_row in enumerate(INIT_GRID):
@@ -48,6 +50,9 @@ def init_tiles_groups(level_file_path: str):
                 if isinstance(populated_obj, Tower):
                     towers.add(populated_obj)
 
-    return all_sprites, roads, towers, tiles
+                if isinstance(populated_obj, Castle):
+                    castles.add(populated_obj)
+
+    return all_sprites, roads, towers, tiles, castles
 
 
