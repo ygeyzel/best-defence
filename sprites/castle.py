@@ -1,6 +1,6 @@
 from typing import Tuple
-from utils.resources import load_image
 from sprites.tower import TowerStats, Tower
+
 
 class Castle(Tower):
     def __init__(self, pos: Tuple[int, int]):

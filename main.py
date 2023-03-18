@@ -1,6 +1,6 @@
 import pygame as pg
 
-from gameplay.general_fire_management import towers_fire_management
+from gameplay.tower_management import towers_management
 from gameplay.mouseactions import highlight_tile_under_mouse, handle_mouse_click
 from gameplay.main_soldier_interact import set_soldiers_manuverability
 from gameplay.main_soldier_interact import draw_soldiers_hp_bar, update_soldiers_state
@@ -39,7 +39,7 @@ def main():
         screen.blit(background, (0, 0))
 
         set_soldiers_manuverability(sprite_groups["soldiers"], sprite_groups["roads"])
-        towers_fire_management(sprite_groups["towers"], sprite_groups["soldiers"])
+        towers_management(sprite_groups["towers"], sprite_groups["soldiers"])
 
         sprite_groups["all_sprites"].update()
         sprite_groups["soldiers"].clear(screen, background)
