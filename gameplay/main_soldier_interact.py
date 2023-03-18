@@ -11,6 +11,6 @@ def set_soldiers_manuverability(soldiers_group: pg.sprite.Group, roads_group: pg
             soldier.manuverability_factor = 1
 
 
-def draw_soldiers_hp_bar(soldiers: pg.sprite.Group, screen: pg.display):
+def draw_soldiers_hp_bar(soldiers: pg.sprite.Group):
     for soldier in soldiers:
-        soldier.draw_hp_bar(screen)
+        soldier.draw_hp_bar()
