@@ -4,6 +4,7 @@ from sprites.castle import Castle
 from sprites.dice import Face, FaceType
 from sprites.roads import Road, RoadState
 from sprites.tower import Tower
+from sprites.barracks import Barracks
 
 
 class TileAction(Enum):
@@ -12,11 +13,11 @@ class TileAction(Enum):
     RECRUIT = auto()
 
 
-class GameStats:
+class GameStatsManager:
     def __init__(self, rolls: int = 20):
         self.rolls = rolls
         self.actions_inventory = {
-            action: 1 for action in TileAction
+            action: 0 for action in TileAction
         }
 
     def __repr__(self):
@@ -40,8 +41,14 @@ class GameStats:
         return self.rolls > 0
 
     def preform_action(self, action: TileAction, tile_sprite: pg.sprite.Sprite):
+        action_switch = {
+            TileAction.ENGINEERING: Road.upgrade,
+            # TileAction.ARTILLERY: Tower.artillery,
+            # TileAction.RECRUIT: Barracks.recruit
+        }
 
-        pass
+        action_switch[action](tile_sprite)
+        self.actions_inventory[action] -= 1
 
     def update_up_by_dice_face(self, face: Face):
         match face.face_type:

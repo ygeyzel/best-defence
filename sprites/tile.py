@@ -5,7 +5,7 @@ from sprites.roads import road_factory, RoadState, Road
 from sprites.tower import tower_factory, TowerType, Tower
 from sprites.barracks import barracks_factory, Barracks
 from sprites.castle import castle_factory, Castle
-from gameplay.game_stats import GameStats, TileAction
+from gameplay.game_stats import GameStatsManager, TileAction
 from utils.resources import load_image
 from utils.common import TILE_WIDTH
 
@@ -23,13 +23,13 @@ class TileObject(Enum):
 
 class Tile(pg.sprite.Sprite):
 
-    def __init__(self, pos: Tuple[float, float], game_stats: GameStats):
+    def __init__(self, pos: Tuple[float, float], game_stats_manager: GameStatsManager):
         pg.sprite.Sprite.__init__(self)
 
         self.tile_object = None
         self.is_highlighted = False
 
-        self.game_stats = game_stats
+        self.game_stats_manager = game_stats_manager
         self.image, self.rect = load_image(
             'tiles/empty.png', (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
@@ -85,13 +85,9 @@ class Tile(pg.sprite.Sprite):
         if action is None:
             return False
 
-        return self.game_stats.is_action_avialable(action, self.tile_object)
+        return self.game_stats_manager.is_action_avialable(action, self.tile_object)
 
     def preform_mouse_action(self):
         
-        pass
-        # if self.is_mouse_action_active():
-        #     action = self.mouse_action()
-        #     action, action_stats = action_switch[action]
-
-        #     action_func(self.tile_object)
+        if self.is_mouse_action_active():
+            self.game_stats_manager.preform_action(self.mouse_action(), self.tile_object)

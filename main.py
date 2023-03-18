@@ -3,7 +3,7 @@ import pygame as pg
 from gameplay.tower_management import towers_management
 from gameplay.mouseactions import highlight_tile_under_mouse, handle_mouse_click
 from gameplay.soldiers_management import soldiers_management
-from gameplay.game_stats import GameStats
+from gameplay.game_stats import GameStatsManager
 from sprites.soldier import Soldier
 from utils.grid import init_tiles_groups
 
@@ -21,9 +21,9 @@ def main():
     clock = pg.time.Clock()
     running = True
 
-    game_stats = GameStats(INIT_ROLLS)
+    game_stats_manager = GameStatsManager(INIT_ROLLS)
 
-    sprite_groups = init_tiles_groups('levels/test_level.json', game_stats)
+    sprite_groups = init_tiles_groups('levels/test_level.json', game_stats_manager)
     sprite_groups["soldiers"] = pg.sprite.Group()
 
     soldier_0 = Soldier((150, 240), 2000000000, 2, 50) # temp
