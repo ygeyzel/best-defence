@@ -6,6 +6,7 @@ from sprites.roads import Road
 from sprites.tower import Tower
 from sprites.castle import Castle
 from utils.common import TILE_WIDTH
+from gameplay.game_stats import GameStats
 
 
 def load_map_from_file(map_file_path: str, tile_set='levels/tile_set.json'): #grop,
@@ -23,7 +24,7 @@ def load_map_from_file(map_file_path: str, tile_set='levels/tile_set.json'): #gr
     return grid_start_pos, grid
 
 
-def init_tiles_groups(level_file_path: str) -> Dict[str, pg.sprite.Group]:
+def init_tiles_groups(level_file_path: str, game_stats: GameStats) -> Dict[str, pg.sprite.Group]:
 
     sprite_groups = {
         "all_sprites": pg.sprite.RenderPlain(),
@@ -38,7 +39,7 @@ def init_tiles_groups(level_file_path: str) -> Dict[str, pg.sprite.Group]:
         for j, tile_object in enumerate(grid_row):
             x = GRID_START_POS[0] + TILE_WIDTH * j
             y = GRID_START_POS[1] + TILE_WIDTH * i
-            tile = Tile((x, y))
+            tile = Tile((x, y), game_stats)
 
             sprite_groups["tiles"].add(tile)
             sprite_groups["all_sprites"].add(tile)
