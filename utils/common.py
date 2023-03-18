@@ -7,3 +7,5 @@ IMAGES_DIR = os.path.join(RES_DIR, "images")
 SOUNDS_DIR = os.path.join(RES_DIR, "sounds")
 
 TILE_WIDTH = 35
+
+DEFULTE_ARTILLERY_DAMAGE = 50

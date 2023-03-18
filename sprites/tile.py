@@ -93,9 +93,10 @@ class Tile(pg.sprite.Sprite):
 
     def preform_mouse_action(self):
         action_func_switch = {
-            TileMouseAction.ENGINEERING: Road.upgrade
+            TileMouseAction.ENGINEERING: Road.upgrade,
+            TileMouseAction.ATTACK: Tower.artillery_hit
         }
-        
+
         if self.is_mouse_action_active():
             action = self.mouse_action()
             action_func = action_func_switch[action]
