@@ -20,35 +20,35 @@ def main():
     clock = pg.time.Clock()
     running = True
 
-    all_sprites, roads, towers, tiles, castels = init_tiles_groups('docs/test_level.json')
-    soldiers = pg.sprite.Group()
+    sprite_groups = init_tiles_groups('docs/test_level.json')
+    sprite_groups["soldiers"] = pg.sprite.Group()
 
     soldier_0 = Soldier((150, 240), 200, 2, 50) # temp
-    soldiers.add(soldier_0)
-    all_sprites.add(soldier_0)
+    sprite_groups["soldiers"].add(soldier_0)
+    sprite_groups["all_sprites"].add(soldier_0)
 
     while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
             if event.type == pg.MOUSEMOTION:
-                highlight_tile_under_mouse(tiles)
+                highlight_tile_under_mouse(sprite_groups["tiles"])
             if event.type == pg.MOUSEBUTTONDOWN:
-                handle_mouse_click(tiles)
+                handle_mouse_click(sprite_groups["tiles"])
 
         screen.blit(background, (0, 0))
 
-        set_soldiers_manuverability(soldiers, roads)
-        towers_fire_management(towers, soldiers)
+        set_soldiers_manuverability(sprite_groups["soldiers"], sprite_groups["roads"])
+        towers_fire_management(sprite_groups["towers"], sprite_groups["soldiers"])
 
-        all_sprites.update()
-        soldiers.clear(screen, background)
+        sprite_groups["all_sprites"].update()
+        sprite_groups["soldiers"].clear(screen, background)
 
-        all_sprites.draw(screen)
+        sprite_groups["all_sprites"].draw(screen)
 
-        draw_soldiers_hp_bar(soldiers)
-        highlight_tile_under_mouse(tiles)
-        update_soldiers_state(soldiers, castels)
+        draw_soldiers_hp_bar(sprite_groups["soldiers"])
+        highlight_tile_under_mouse(sprite_groups["tiles"])
+        update_soldiers_state(sprite_groups["soldiers"], sprite_groups["castle"])
 
         pg.display.flip()
         clock.tick(FPS)
