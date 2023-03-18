@@ -4,9 +4,11 @@ from typing import Tuple
 import pygame as pg
 from utils.resources import load_image
 from utils.common import TILE_WIDTH
+from sprites.dashboard import Dashboard
 import time
+import os
 from math import dist
-
+from utils.common import DEFAULT_ARTILLERY_DAMAGE
 
 HP_BAR_WIDTH = TILE_WIDTH
 HP_BAR_HEIGHT = 5
@@ -21,7 +23,7 @@ class TowerStats:
     attack_delay: float
     damage: float
     attack_range: int
-    tower_image: str
+    tower_images_dir: str
 
 
 class Tower(pg.sprite.Sprite):
@@ -35,11 +37,15 @@ class Tower(pg.sprite.Sprite):
         self.attack_range = stats.attack_range
         self.damage = stats.damage
 
-        tower_image = f"towers/{stats.tower_image}"
-        self.image, self.rect = load_image(
-            tower_image, (TILE_WIDTH, TILE_WIDTH))
+        tower_images_dir = f"towers/{stats.tower_images_dir}"
+        self.images = os.listdir(tower_images_dir)
+        self.image, self.rect = load_image(self.images[0], (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
         self.last_shot_time_stamp = time.time()
+
+    @property
+    def is_destroyed(self):
+        return self.hp == 0
 
     def attack_timer(self):
         current_time = time.time()
@@ -72,17 +78,27 @@ class Tower(pg.sprite.Sprite):
         soldier_pos_tiles = (soldier.rect.x/TILE_WIDTH,
                              soldier.rect.y/TILE_WIDTH)
         distance_to_target = dist(tower_pos_tiles, soldier_pos_tiles)
-        if distance_to_target <= self.attack_range:
-            return True
-        else:
-            return False
+        return distance_to_target <= self.attack_range
+
+    def update_image(self):
+        num_of_non_destroyed_state_images = len(self.images) - 1
+        hp_resolotion = self.max_hp / num_of_non_destroyed_state_images
+        boundaries = [(i * hp_resolotion, (i + 1) * hp_resolotion) for i in range(num_of_non_destroyed_state_images)].reverse()
+        for image_num, (down, up) in enumerate(boundaries):
+            if down < self.hp <= up:
+                self.image, _ = load_image(self.images[image_num], (TILE_WIDTH, TILE_WIDTH))
+
+
+    def artillery_hit(self, dashboard: Dashboard, hit_hp: int = DEFAULT_ARTILLERY_DAMAGE):
+        if dashboard.is_can_artillery:
+            dashboard.artillery -= 1
+            self.hp = max(0, self.hp - hit_hp)
+            self.update_image()
 
     def fire_management(self, soldiers):
-        if self.attack_timer():
+        if (not self.is_destroyed) and self.attack_timer():
             target = self.find_target(soldiers)
             self.fire_on_target(target)
-        else:
-            pass
 
     def fire_on_target(self, target):
         if target:
