@@ -1,8 +1,9 @@
 from dataclasses import dataclass
-from enum import auto, Enum
-from typing import Tuple, TypedDict
+from enum import Enum
+from typing import Tuple
 import pygame as pg
 from utils.resources import load_image
+from utils.common import TILE_WIDTH
 import time
 from math import dist
 from utils import common
@@ -29,7 +30,7 @@ class Tower(pg.sprite.Sprite):
         self.damage = stats.damage
 
         tower_image = f"towers/{stats.tower_image}"
-        self.image, self.rect = load_image(tower_image)
+        self.image, self.rect = load_image(tower_image, (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
         self.last_shot_time_stamp = time.time()
 
