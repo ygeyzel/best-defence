@@ -7,7 +7,7 @@ from utils.common import TILE_WIDTH
 import time
 import os
 from math import dist
-from utils.common import DEFULTE_ARTILLERY_DAMAGE
+from utils.common import DEFULTE_ARTILLERY_DAMAGE, IMAGES_DIR
 
 HP_BAR_WIDTH = TILE_WIDTH
 HP_BAR_HEIGHT = 5
@@ -35,9 +35,13 @@ class Tower(pg.sprite.Sprite):
         self.attack_range = stats.attack_range
         self.damage = stats.damage
 
-        tower_images_dir = f"towers/{stats.tower_images_dir}"
-        self.images = os.listdir(tower_images_dir)
-        self.image, self.rect = load_image(self.images[0], (TILE_WIDTH, TILE_WIDTH))
+        tower_images_dir = os.path.join(
+            IMAGES_DIR, "towers", stats.tower_images_dir)
+        images_names = os.listdir(tower_images_dir)
+        self.images = [os.path.join(tower_images_dir, image)
+                       for image in images_names]
+        self.image, self.rect = load_image(
+            self.images[0], (TILE_WIDTH, TILE_WIDTH))
         self.rect.x, self.rect.y = pos
         self.last_shot_time_stamp = time.time()
 
@@ -81,10 +85,12 @@ class Tower(pg.sprite.Sprite):
     def update_image(self):
         num_of_non_destroyed_state_images = len(self.images) - 1
         hp_resolotion = self.max_hp / num_of_non_destroyed_state_images
-        boundaries = [(i * hp_resolotion, (i + 1) * hp_resolotion) for i in range(num_of_non_destroyed_state_images)].reverse()
+        boundaries = [(i * hp_resolotion, (i + 1) * hp_resolotion)
+                      for i in range(num_of_non_destroyed_state_images)].reverse()
         for image_num, (down, up) in enumerate(boundaries):
             if down < self.hp <= up:
-                self.image, _ = load_image(self.images[image_num], (TILE_WIDTH, TILE_WIDTH))
+                self.image, _ = load_image(
+                    self.images[image_num], (TILE_WIDTH, TILE_WIDTH))
 
     def artillery_hit(self, hit_hp: int = DEFULTE_ARTILLERY_DAMAGE):
         self.hp = max(0, self.hp - hit_hp)
