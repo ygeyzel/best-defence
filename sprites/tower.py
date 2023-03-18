@@ -6,7 +6,6 @@ from utils.resources import load_image
 from utils.common import TILE_WIDTH
 import time
 from math import dist
-from utils import common
 
 
 @dataclass
@@ -61,8 +60,8 @@ class Tower(pg.sprite.Sprite):
         return valid_targets
 
     def is_soldier_valid_target(self, soldier):
-        tower_pos_tiles = (self.rect.x/common.TILE_WIDTH, self.rect.y/common.TILE_WIDTH)
-        soldier_pos_tiles = (soldier.rect.x/common.TILE_WIDTH, soldier.rect.y/common.TILE_WIDTH)
+        tower_pos_tiles = (self.rect.x/TILE_WIDTH, self.rect.y/TILE_WIDTH)
+        soldier_pos_tiles = (soldier.rect.x/TILE_WIDTH, soldier.rect.y/TILE_WIDTH)
         distance_to_target = dist(tower_pos_tiles, soldier_pos_tiles)
         if distance_to_target <= self.attack_range:
             return True
