@@ -8,6 +8,12 @@ import time
 from math import dist
 
 
+HP_BAR_WIDTH = TILE_WIDTH
+HP_BAR_HEIGHT = 5
+HP_BAR_HEIGHT_OFFSET = 5
+HP_BAR_CLR = (255, 128, 0)
+
+
 @dataclass
 class TowerStats:
     max_hp: float
@@ -80,8 +86,12 @@ class Tower(pg.sprite.Sprite):
             target.hp = target.hp - self.damage
             # TO DO: CHECK SOLDIER IS ALIVE?
 
-    def update(self):
-        pass
+    def draw_hp_bar(self):
+        remaining_hp_part = self.hp/self.max_hp
+        hp_bar_color = [(1-remaining_hp_part) * HP_BAR_CLR[0], remaining_hp_part * HP_BAR_CLR[1], HP_BAR_CLR[2]]
+        pg.draw.rect(self.image, (0, 0, 0), (0, 0, HP_BAR_WIDTH, HP_BAR_HEIGHT))
+        pg.draw.rect(self.image, hp_bar_color, (0, 0, HP_BAR_WIDTH * remaining_hp_part, HP_BAR_HEIGHT))
+
 
 class TowerType(Enum):
     TARGETING = TowerStats(max_hp=150, damage=20, attack_delay=0.5,
