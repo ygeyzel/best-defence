@@ -58,3 +58,4 @@ class Soldier(pg.sprite.Sprite):
         hp_bar_color = [(1-remaining_hp_part) * HP_BAR_CLR[0], remaining_hp_part * HP_BAR_CLR[1], HP_BAR_CLR[2]]
         pg.draw.rect(screen, hp_bar_color, (self.rect.x, self.rect.y - HP_BAR_HEIGHT_OFFSET,
                                             HP_BAR_WIDTH * remaining_hp_part, HP_BAR_HEIGHT))
+
