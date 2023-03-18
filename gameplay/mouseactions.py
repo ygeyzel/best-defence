@@ -11,8 +11,6 @@ def highlight_tile_under_mouse(tiles_group: pg.sprite.Group):
             is_at_least_one_highlighted = False
         else:
             tile.is_highlighted = False
-        
-        tile.draw_frame()
 
 
 def handle_mouse_click(tiles: pg.sprite.Group):
