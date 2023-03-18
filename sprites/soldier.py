@@ -53,7 +53,7 @@ class Soldier(pg.sprite.Sprite):
         self.kill()
 
     def draw_hp_bar(self):
-        remaining_hp_part = self.hp/self.max_hp
+        remaining_hp_part = max(self.hp, 0) / self.max_hp
         hp_bar_color = [(1-remaining_hp_part) * HP_BAR_CLR[0], remaining_hp_part * HP_BAR_CLR[1], HP_BAR_CLR[2]]
         pg.draw.rect(self.image, (0, 0, 0), (0, 0, HP_BAR_WIDTH, HP_BAR_HEIGHT))
         pg.draw.rect(self.image, hp_bar_color, (0, 0, HP_BAR_WIDTH * remaining_hp_part, HP_BAR_HEIGHT))
