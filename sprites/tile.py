@@ -88,6 +88,5 @@ class Tile(pg.sprite.Sprite):
         return self.game_stats_manager.is_action_avialable(action, self.tile_object)
 
     def preform_mouse_action(self):
-        
         if self.is_mouse_action_active():
             self.game_stats_manager.preform_action(self.mouse_action(), self.tile_object)
